@@ -2,13 +2,11 @@ from fastapi import FastAPI
 import uvicorn
 
 from core.config import settings
+from apis.general_pages.route_homepage import general_pages_router
+
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)
-
-@app.get('/')
-def hello_api():
-    return {'message': 'Hello world!'}
-
+app.include_router(general_pages_router)
 
 
 if __name__ == '__main__':
