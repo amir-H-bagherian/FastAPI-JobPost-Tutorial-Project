@@ -1,8 +1,9 @@
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
-
-load_dotenv()
+env_path = Path('.') / '.env'
+load_dotenv(env_path)
 
 class Settings:
     PROJECT_NAME: str = 'Job Board'
