@@ -4,7 +4,7 @@ import uvicorn
 
 from core.config import settings
 from apis.general_pages.route_homepage import general_pages_router
-from db.base_class import Base
+from db.base import Base
 from db.session import engine
 
 
