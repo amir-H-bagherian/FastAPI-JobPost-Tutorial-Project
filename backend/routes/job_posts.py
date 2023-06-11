@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from html import escape
+from typing import List
 
 from schemas.job_posts import JobCreate, JobShow
 from db.session import get_db
-from crud.job_posts import create_new_job_post, read_job_post
+from crud.job_posts import create_new_job_post, read_job_post, read_all_job_posts
 
 
 job_post_router = APIRouter(prefix='/jobs', tags=['job_posts'])
@@ -22,3 +23,8 @@ def get_single_job_post(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404,
                             detail=f"Requested job post with id {escape(id)} is not found!")
     return requested_job_post
+
+@job_post_router.get('/all/', response_model=List[JobShow])
+def read_all_job_posts(db: Session = Depends(get_db)):
+    list_of_all_posts = read_all_job_posts(db=db)
+    return list_of_all_posts

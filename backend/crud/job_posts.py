@@ -14,3 +14,7 @@ def create_new_job_post(new_job_post, db, owner_id):
 def read_job_post(id, db: Session):
     queried_job_post = db.query(JobPost).filter(JobPost.id==id).first()
     return queried_job_post
+
+def read_all_job_posts(db: Session):
+    list_of_posts = db.query(JobPost).filter(JobPost.is_active).all()
+    return list_of_posts
